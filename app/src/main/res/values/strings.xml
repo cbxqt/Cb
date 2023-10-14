@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Cb</string>
+    <string name="bottom_navigation_home">首页</string>
+    <string name="bottom_navigation_user">我的</string>
+</resources>

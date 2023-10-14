@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Cb/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2815" />
+        <entry key="..\:/Cb/app/src/main/res/drawable/bottom_navigation_border.xml" value="0.2815" />
+        <entry key="..\:/Cb/app/src/main/res/drawable/bottom_navigation_home_selector.xml" value="0.2815" />
+        <entry key="..\:/Cb/app/src/main/res/drawable/bottom_navigation_user_selector.xml" value="0.2815" />
+        <entry key="..\:/Cb/app/src/main/res/drawable/ic_baseline_dehaze_24.xml" value="0.2815" />
+        <entry key="..\:/Cb/app/src/main/res/drawable/ic_baseline_record_voice_over_24.xml" value="0.2815" />
+        <entry key="..\:/Cb/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2815" />
+        <entry key="..\:/Cb/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2815" />
+        <entry key="..\:/Cb/app/src/main/res/layout/activity_main.xml" value="0.3619791666666667" />
+        <entry key="..\:/Cb/app/src/main/res/layout/botton_navigation_home.xml" value="0.3609375" />
+        <entry key="..\:/Cb/app/src/main/res/layout/fragement_home.xml" value="0.3619791666666667" />
+        <entry key="..\:/Cb/app/src/main/res/layout/fragement_user.xml" value="0.3619791666666667" />
+        <entry key="..\:/Cb/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.3619791666666667" />
+        <entry key="..\:/Cb/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2815" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
