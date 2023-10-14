@@ -15,8 +15,13 @@
         <entry key="..\:/Cb/app/src/main/res/layout/botton_navigation_home.xml" value="0.3609375" />
         <entry key="..\:/Cb/app/src/main/res/layout/fragement_home.xml" value="0.3619791666666667" />
         <entry key="..\:/Cb/app/src/main/res/layout/fragement_user.xml" value="0.3619791666666667" />
+        <entry key="..\:/Cb/app/src/main/res/layout/fragment_home.xml" value="0.3619791666666667" />
+        <entry key="..\:/Cb/app/src/main/res/layout/fragment_user.xml" value="0.3619791666666667" />
+        <entry key="..\:/Cb/app/src/main/res/layout/toolbar_home.xml" value="0.3609375" />
         <entry key="..\:/Cb/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.3619791666666667" />
         <entry key="..\:/Cb/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2815" />
+        <entry key="..\:/Cb/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2815" />
+        <entry key="..\:/Cb/app/src/main/res/xml/accessibility_service_config.xml" value="0.18489583333333334" />
       </map>
     </option>
   </component>
