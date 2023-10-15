@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -24,6 +25,15 @@ public class MainActivity extends AppCompatActivity {
         setBottomNavigationView();
         showFragment(new HomeFragment()); //默认主页面
 
+        //防止杀后台
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_USER_PRESENT);
+
+        ScreenReceiver receiver = new ScreenReceiver();
+        registerReceiver(receiver, filter);
+
+        //常驻通知栏
         Intent serviceIntent = new Intent(this, HyyForegroundService.class);
         startService(serviceIntent);
     }
