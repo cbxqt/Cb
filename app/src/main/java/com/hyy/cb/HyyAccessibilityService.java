@@ -20,7 +20,7 @@ public class HyyAccessibilityService extends AccessibilityService {
         String packageName = accessibilityEvent.getPackageName().toString();
         Log.d("打开成功", packageName);
         //判定是否回到主页面切换应用
-        if (packageName.contains("launcher")) {
+        if (packageName.contains("launcher") && AlreadyPass) {
             AlreadyPass = false;
             Log.d("切换", "返回主页面");
         }
@@ -76,14 +76,13 @@ public class HyyAccessibilityService extends AccessibilityService {
                 if (node.isClickable()) {
                     // 如果目标节点是可点击的，直接执行点击操作
                     node.performAction(AccessibilityNodeInfo.ACTION_CLICK);
-                    Toast.makeText(getApplicationContext(), "跳过完成", Toast.LENGTH_SHORT).show();
                 } else {
                     // 如果目标节点不可点击，模拟点击操作
                     Bundle arguments = new Bundle();
                     arguments.putBoolean("ACTION_ARGUMENT_CLICKABLE", true);
                     node.performAction(AccessibilityNodeInfo.ACTION_CLICK, arguments);
-                    Toast.makeText(getApplicationContext(), "跳过完成", Toast.LENGTH_SHORT).show();
                 }
+                Toast.makeText(getApplicationContext(), "跳过完成", Toast.LENGTH_SHORT).show();
             }
         }
 
