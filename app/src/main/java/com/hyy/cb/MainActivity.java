@@ -7,10 +7,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.accessibility.AccessibilityManager;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -18,10 +23,10 @@ import com.google.android.material.navigation.NavigationBarView;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "主任务";
     private final Fragment HomeFragment = new HomeFragment();
     private final Fragment UserFragment = new UserFragment();
-    private final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-    private boolean serviceStart = false;
+    private SharedPreferences sharedPreferences;
     private Intent serviceInformIntent;
     private IntentFilter backgroundFilter;
     private ScreenReceiver backgroundReceiver;
@@ -31,8 +36,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setBottomNavigationView();
+        setBottomNavigationView(); //底部导航栏
         showFragment(HomeFragment); //默认主页面
+
+        //加载数据库
+        sharedPreferences = this.getSharedPreferences("CbPreferences", Context.MODE_PRIVATE);
 
         //防止杀后台
         backgroundFilter = new IntentFilter();
@@ -43,11 +51,9 @@ public class MainActivity extends AppCompatActivity {
         //常驻通知栏
         serviceInformIntent = new Intent(this, HyyForegroundService.class);
 
-    }
+        //检查无障碍服务是否打开
+        isAccessibilityEnabled();
 
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 
     private void setBottomNavigationView() {
@@ -88,15 +94,24 @@ public class MainActivity extends AppCompatActivity {
 
         // 隐藏其他已添加的Fragment
         List<Fragment> fragmentList = fragmentManager.getFragments();
-        if (fragmentList != null) {
-            for (Fragment f : fragmentList) {
-                if (f != existingFragment) {
-                    transaction.hide(f);
-                }
+        for (Fragment f : fragmentList) {
+            if (f != existingFragment) {
+                transaction.hide(f);
             }
         }
 
         transaction.commit();
+    }
+
+    private void isAccessibilityEnabled() {
+        AccessibilityManager accessibilityManager = (AccessibilityManager) getSystemService(Context.ACCESSIBILITY_SERVICE);
+        if (accessibilityManager != null) {
+            boolean isEnabled = accessibilityManager.isEnabled();
+            if (!isEnabled) {
+                Log.d(TAG, "无障碍服务未打开");
+                Toast.makeText(this, "无障碍服务未打开", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     public void startService() {
@@ -104,15 +119,20 @@ public class MainActivity extends AppCompatActivity {
         startService(serviceInformIntent);
         //开启广播
         registerReceiver(backgroundReceiver, backgroundFilter);
-        serviceStart = true;
+        //开启标志
+        sharedPreferences.edit().putBoolean("POWER", true).apply();
+        //检查无障碍是否打开
+        isAccessibilityEnabled();
     }
 
     public void stopService() {
-        if (serviceStart) {
+        if (sharedPreferences.getBoolean("POWER", false)) {
             //关闭通知栏
             stopService(serviceInformIntent);
             //关闭广播
             unregisterReceiver(backgroundReceiver);
+            //关闭标志
+            sharedPreferences.edit().putBoolean("POWER", false).apply();
         }
     }
 
