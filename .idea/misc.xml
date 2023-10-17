@@ -10,16 +10,20 @@
         <entry key="..\:/Cb/app/src/main/res/drawable/bottom_navigation_user_selector.xml" value="0.2815" />
         <entry key="..\:/Cb/app/src/main/res/drawable/ic_baseline_dehaze_24.xml" value="0.2815" />
         <entry key="..\:/Cb/app/src/main/res/drawable/ic_baseline_record_voice_over_24.xml" value="0.2815" />
+        <entry key="..\:/Cb/app/src/main/res/drawable/ic_button_background.xml" value="0.2055" />
+        <entry key="..\:/Cb/app/src/main/res/drawable/ic_button_background_selected.xml" value="0.2055" />
+        <entry key="..\:/Cb/app/src/main/res/drawable/ic_button_migu.xml" value="0.2055" />
         <entry key="..\:/Cb/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2815" />
         <entry key="..\:/Cb/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2815" />
         <entry key="..\:/Cb/app/src/main/res/drawable/ic_power_off.xml" value="0.283" />
         <entry key="..\:/Cb/app/src/main/res/drawable/ic_power_on.xml" value="0.283" />
+        <entry key="..\:/Cb/app/src/main/res/drawable/ic_user_button.xml" value="0.283" />
         <entry key="..\:/Cb/app/src/main/res/layout/activity_main.xml" value="0.3619791666666667" />
         <entry key="..\:/Cb/app/src/main/res/layout/botton_navigation_home.xml" value="0.3609375" />
         <entry key="..\:/Cb/app/src/main/res/layout/fragement_home.xml" value="0.3619791666666667" />
         <entry key="..\:/Cb/app/src/main/res/layout/fragement_user.xml" value="0.3619791666666667" />
         <entry key="..\:/Cb/app/src/main/res/layout/fragment_home.xml" value="0.3619791666666667" />
-        <entry key="..\:/Cb/app/src/main/res/layout/fragment_user.xml" value="0.3619791666666667" />
+        <entry key="..\:/Cb/app/src/main/res/layout/fragment_user.xml" value="0.2857142857142857" />
         <entry key="..\:/Cb/app/src/main/res/layout/toolbar_home.xml" value="0.3609375" />
         <entry key="..\:/Cb/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.3619791666666667" />
         <entry key="..\:/Cb/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2815" />
