@@ -11,4 +11,5 @@
     <color name="Default">#AAB5BD</color>
     <color name="background">#E8DDD9</color>
     <color name="button_clicked">#9BB068</color>
+    <color name="transplant">#00FFFFFF</color>
 </resources>
