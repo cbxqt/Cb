@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 
 public class HomeFragment extends Fragment {
     private Context context;
+    private ImageView imgPower;
+    private SharedPreferences sharedPreferences;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,39 +30,36 @@ public class HomeFragment extends Fragment {
         final MainActivity mainActivity = (MainActivity) getActivity();
 
         if (mainActivity != null) {
-            ImageView imgPower = view.findViewById(R.id.power);
-            SharedPreferences sharedPreferences = context.getSharedPreferences("CbPreferences", Context.MODE_PRIVATE);
-            boolean POWER = sharedPreferences.getBoolean("POWER", false);
-            if (POWER) {
-                mainActivity.startService();
+            imgPower = view.findViewById(R.id.power);
+            sharedPreferences = context.getSharedPreferences("CbPreferences", Context.MODE_PRIVATE);
+
+            if (sharedPreferences.getBoolean("POWER", false) && mainActivity.isAccessibilityEnabled()) {
                 //切换图片
                 imgPower.setImageResource(R.drawable.ic_power_on);
-                imgPower.setContentDescription("on");
             } else {
-                mainActivity.stopService();
                 imgPower.setImageResource(R.drawable.ic_power_off);
-                imgPower.setContentDescription("off");
             }
-
             imgPower.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (imgPower.getContentDescription().equals("off")) {
-                        mainActivity.startService();
-                        //切换图片
-                        imgPower.setImageResource(R.drawable.ic_power_on);
-                        imgPower.setContentDescription("on");
+                    if (!sharedPreferences.getBoolean("POWER", false)) {
+                        //检查是否开启无障碍服务
+                        if (mainActivity.isAccessibilityEnabled()) {
+                            //开启标志
+                            sharedPreferences.edit().putBoolean("POWER", true).apply();
+                            //切换图片
+                            imgPower.setImageResource(R.drawable.ic_power_on);
+                        }
 
                     } else {
-                        mainActivity.stopService();
+                        sharedPreferences.edit().putBoolean("POWER", false).apply();
                         imgPower.setImageResource(R.drawable.ic_power_off);
-                        imgPower.setContentDescription("off");
                     }
 
                 }
             });
         }
-
         return view;
     }
+
 }

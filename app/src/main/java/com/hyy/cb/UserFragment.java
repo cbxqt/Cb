@@ -14,13 +14,16 @@ import androidx.fragment.app.Fragment;
 
 public class UserFragment extends Fragment {
     private SharedPreferences sharedPreferences;
+    private MainActivity mainActivity;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Context context = requireContext();
-        sharedPreferences = context.getSharedPreferences("CbPreferences", Context.MODE_PRIVATE);
         View view = inflater.inflate(R.layout.fragment_user, container, false);
+        Context context = requireContext();
+        mainActivity = (MainActivity) getActivity();
+        sharedPreferences = context.getSharedPreferences("CbPreferences", Context.MODE_PRIVATE);
+
         initializeButton(view);
         return view;
     }
@@ -33,6 +36,7 @@ public class UserFragment extends Fragment {
         ImageButton button_bili = view.findViewById(R.id.button_bili);
         ImageButton button_migu = view.findViewById(R.id.button_migu);
         ImageButton button_football = view.findViewById(R.id.button_football);
+        ImageButton button_preventkill = view.findViewById(R.id.button_preventkill);
         //初始化数据
         initializeStatus(button_inform, "button_inform");
         initializeStatus(button_zhihu, "button_zhihu");
@@ -41,6 +45,7 @@ public class UserFragment extends Fragment {
         initializeStatus(button_bili, "button_bili");
         initializeStatus(button_migu, "button_migu");
         initializeStatus(button_football, "button_football");
+        initializeStatus(button_preventkill, "button_preventkill");
         //监听点击事件
         buttonClicked(button_inform, "button_inform");
         buttonClicked(button_zhihu, "button_zhihu");
@@ -49,6 +54,7 @@ public class UserFragment extends Fragment {
         buttonClicked(button_bili, "button_bili");
         buttonClicked(button_migu, "button_migu");
         buttonClicked(button_football, "button_football");
+        buttonClicked(button_preventkill, "button_preventkill");
     }
 
     private void initializeStatus(ImageButton imageButton, String buttonName) {
@@ -57,6 +63,7 @@ public class UserFragment extends Fragment {
         } else {
             imageButton.setBackgroundResource(R.drawable.ic_button_background_unselected);
         }
+        mainActivity.checkService(sharedPreferences.getBoolean(buttonName, false), buttonName);
     }
 
     private void buttonClicked(ImageButton imageButton, String buttonName) {
@@ -70,6 +77,7 @@ public class UserFragment extends Fragment {
                     sharedPreferences.edit().putBoolean(buttonName, false).apply();
                     imageButton.setBackgroundResource(R.drawable.ic_button_background_unselected);
                 }
+                mainActivity.checkService(sharedPreferences.getBoolean(buttonName, false), buttonName);
             }
         });
     }

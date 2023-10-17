@@ -51,9 +51,6 @@ public class MainActivity extends AppCompatActivity {
         //常驻通知栏
         serviceInformIntent = new Intent(this, HyyForegroundService.class);
 
-        //检查无障碍服务是否打开
-        isAccessibilityEnabled();
-
     }
 
     private void setBottomNavigationView() {
@@ -79,61 +76,53 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-
-        // 检查是否已经添加了同样的Fragment
-        Fragment existingFragment = fragmentManager.findFragmentByTag(fragment.getClass().getSimpleName());
-        if (existingFragment != null) {
-            // 如果已经添加了同样的Fragment，直接显示它
-            transaction.show(existingFragment);
-        } else {
-            // 如果没有添加同样的Fragment，则添加新的Fragment
-            transaction.add(R.id.fragment_container, fragment, fragment.getClass().getSimpleName());
-        }
-
-        // 隐藏其他已添加的Fragment
-        List<Fragment> fragmentList = fragmentManager.getFragments();
-        for (Fragment f : fragmentList) {
-            if (f != existingFragment) {
-                transaction.hide(f);
-            }
-        }
-
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
     }
 
-    private void isAccessibilityEnabled() {
+    public boolean isAccessibilityEnabled() {
         AccessibilityManager accessibilityManager = (AccessibilityManager) getSystemService(Context.ACCESSIBILITY_SERVICE);
         if (accessibilityManager != null) {
             boolean isEnabled = accessibilityManager.isEnabled();
             if (!isEnabled) {
                 Log.d(TAG, "无障碍服务未打开");
                 Toast.makeText(this, "无障碍服务未打开", Toast.LENGTH_SHORT).show();
+                return false;
+            } else {
+                Log.d(TAG, "无障碍服务已打开");
+                sharedPreferences.edit().putBoolean("POWER", true).apply();
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+
+    public void checkService(boolean buttonOn, String buttonName) {
+        if (buttonName.equals("button_inform")) {
+            if (buttonOn) {
+                //开启常驻通知栏
+                startService(serviceInformIntent);
+                sharedPreferences.edit().putBoolean("serviceInform", true).apply();
+            } else if (sharedPreferences.getBoolean("serviceInform", false)) {
+                //关闭通知栏
+                stopService(serviceInformIntent);
+                sharedPreferences.edit().putBoolean("serviceInform", false).apply();
+            }
+        } else if (buttonName.equals("button_preventkill")) {
+            if (buttonOn) {
+                //开启防杀后台
+                registerReceiver(backgroundReceiver, backgroundFilter);
+                sharedPreferences.edit().putBoolean("backgroundReceiver", true).apply();
+            } else if (sharedPreferences.getBoolean("backgroundReceiver", false)) {
+                //关闭防杀后台
+                unregisterReceiver(backgroundReceiver);
+                sharedPreferences.edit().putBoolean("backgroundReceiver", false).apply();
             }
         }
-    }
 
-    public void startService() {
-        //开启常驻通知栏
-        startService(serviceInformIntent);
-        //开启广播
-        registerReceiver(backgroundReceiver, backgroundFilter);
-        //开启标志
-        sharedPreferences.edit().putBoolean("POWER", true).apply();
-        //检查无障碍是否打开
-        isAccessibilityEnabled();
-    }
-
-    public void stopService() {
-        if (sharedPreferences.getBoolean("POWER", false)) {
-            //关闭通知栏
-            stopService(serviceInformIntent);
-            //关闭广播
-            unregisterReceiver(backgroundReceiver);
-            //关闭标志
-            sharedPreferences.edit().putBoolean("POWER", false).apply();
-        }
     }
 
 }

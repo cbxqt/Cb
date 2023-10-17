@@ -44,8 +44,8 @@ public class HyyForegroundService extends Service {
     private Notification createNotification() {
         // 创建通知
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("My App is Running")
-                .setContentText("Your app is running in the background.")
+                .setContentTitle("正在运行")
+                .setContentText("点击进入APP")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setOngoing(true); // 使通知成为常驻通知
 
