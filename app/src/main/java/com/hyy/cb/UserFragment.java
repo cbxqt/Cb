@@ -33,27 +33,27 @@ public class UserFragment extends Fragment {
         ImageButton button_zhihu = view.findViewById(R.id.button_zhihu);
         ImageButton button_tieba = view.findViewById(R.id.button_tieba);
         ImageButton button_cloudmusic = view.findViewById(R.id.button_cloudmusic);
-        ImageButton button_bili = view.findViewById(R.id.button_bili);
         ImageButton button_migu = view.findViewById(R.id.button_migu);
-        ImageButton button_football = view.findViewById(R.id.button_football);
+        ImageButton button_football = view.findViewById(R.id.button_switch);
+        ImageButton button_bili = view.findViewById(R.id.button_bili);
         ImageButton button_preventkill = view.findViewById(R.id.button_preventkill);
         //初始化数据
         initializeStatus(button_inform, "button_inform");
         initializeStatus(button_zhihu, "button_zhihu");
         initializeStatus(button_tieba, "button_tieba");
         initializeStatus(button_cloudmusic, "button_cloudmusic");
-        initializeStatus(button_bili, "button_bili");
         initializeStatus(button_migu, "button_migu");
-        initializeStatus(button_football, "button_football");
+        initializeStatus(button_football, "button_switch");
+        initializeStatus(button_bili, "button_bili");
         initializeStatus(button_preventkill, "button_preventkill");
         //监听点击事件
         buttonClicked(button_inform, "button_inform");
         buttonClicked(button_zhihu, "button_zhihu");
         buttonClicked(button_tieba, "button_tieba");
         buttonClicked(button_cloudmusic, "button_cloudmusic");
-        buttonClicked(button_bili, "button_bili");
         buttonClicked(button_migu, "button_migu");
-        buttonClicked(button_football, "button_football");
+        buttonClicked(button_football, "button_switch");
+        buttonClicked(button_bili, "button_bili");
         buttonClicked(button_preventkill, "button_preventkill");
     }
 

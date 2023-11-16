@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setBottomNavigationView() {
+        //用于切换底部导航栏
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         // 设置底部导航栏的选择监听器
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -80,12 +82,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showFragment(Fragment fragment) {
+        //选择底部导航栏的显示
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
     }
 
     public boolean isAccessibilityEnabled() {
+        //判断无障碍是否打开
         AccessibilityManager accessibilityManager = (AccessibilityManager) getSystemService(Context.ACCESSIBILITY_SERVICE);
         if (accessibilityManager != null) {
             boolean isEnabled = accessibilityManager.isEnabled();
@@ -103,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     public void checkService(boolean buttonOn, String buttonName) {
+        //判断防杀后台服务是否打开,主要是常驻通知栏和开屏启动
         if (buttonName.equals("button_inform")) {
             if (buttonOn) {
                 //开启常驻通知栏
