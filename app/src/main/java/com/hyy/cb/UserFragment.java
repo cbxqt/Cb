@@ -1,6 +1,7 @@
 package com.hyy.cb;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +24,16 @@ public class UserFragment extends Fragment {
         Context context = requireContext();
         mainActivity = (MainActivity) getActivity();
         sharedPreferences = context.getSharedPreferences("CbPreferences", Context.MODE_PRIVATE);
+
+        //跳转至添加其他应用
+        ImageButton button_addpackage = view.findViewById(R.id.button_addpackage);
+        button_addpackage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(requireContext(), PackageList.class);
+                startActivity(intent);
+            }
+        });
 
         initializeButton(view);
         return view;

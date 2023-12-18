@@ -7,8 +7,13 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class HyyAccessibilityService extends AccessibilityService {
     private static final String TAG = "无障碍服务";
@@ -17,6 +22,7 @@ public class HyyAccessibilityService extends AccessibilityService {
     //用于无障碍服务
     private boolean AlreadyPass = false; // 判定是否已经跳过
     private String LastKnownPackageName = null; //最后打开的AppName
+    private List<String> elsePackageList;
 
     @Override
     public void onCreate() {
@@ -32,6 +38,7 @@ public class HyyAccessibilityService extends AccessibilityService {
         //处理无障碍事件
         if (accessibilityEvent == null) return;
         boolean POWER = sharedPreferences.getBoolean("POWER", false);
+        elsePackageList = new ArrayList<String>(sharedPreferences.getStringSet("packageList", new HashSet<String>()));
         if (POWER) {
             // 获取当前应用包名
             if (accessibilityEvent.getPackageName() == null) return;
@@ -71,15 +78,12 @@ public class HyyAccessibilityService extends AccessibilityService {
                 String ButtonName = APP_PACKAGE_NAME.get(packageName);
                 if (sharedPreferences.getBoolean(ButtonName, false)) {
                     operateEnable(rootNode);
-                    Log.d(TAG, "跳过"+packageName);
                 } else {
                     Log.d(TAG, "开关未打开" + packageName);
                 }
-            } else {
-                if (sharedPreferences.getBoolean("button_switch", false)) {
+            } else if (sharedPreferences.getBoolean("button_switch", false)){
+                if (elsePackageList.contains(packageName)) {
                     operateEnable(rootNode);
-                } else {
-                    Log.d(TAG, "未打开其他应用跳过");
                 }
             }
         }

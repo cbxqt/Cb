@@ -13,31 +13,41 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cb"
         tools:targetApi="31">
-        <meta-data android:name="versionCode"
-            android:value="1"/>
-        <meta-data android:name="versionName"
-            android:value="1.0.0"/>
+        <activity
+            android:name=".PackageList"
+            android:exported="false" />
+
+        <meta-data
+            android:name="versionCode"
+            android:value="1" />
+        <meta-data
+            android:name="versionName"
+            android:value="1.0.0" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".PixelActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:launchMode="singleInstance"
             android:configChanges="orientation|screenSize"
-            android:excludeFromRecents="true">
-        </activity>
-        <service android:name=".HyyAccessibilityService"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
-            android:exported="true">
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+
+        <service
+            android:name=".HyyAccessibilityService"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
+
             <meta-data
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessibility_service_config" />

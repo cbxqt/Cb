@@ -51,7 +51,7 @@ public class HyyForegroundService extends Service {
 
         // 创建一个 PendingIntent，以便用户点击通知时打开你的应用
         Intent intent = new Intent(this, MainActivity.class); // 替换为你的入口 Activity
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE);
         builder.setContentIntent(pendingIntent);
 
         return builder.build();
